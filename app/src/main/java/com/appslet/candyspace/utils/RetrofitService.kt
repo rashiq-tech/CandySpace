@@ -17,6 +17,13 @@ interface RetrofitService {
         @Query("site") site: String
     ): Call<String>
 
+    @GET("users/{id}/top-tags")
+    fun getTopTags(
+        @Path(value = "id") id: Int,
+        @Query("pagesize") pageSize: Int,
+        @Query("site") site: String
+    ): Call<String>
+
 
     companion object {
         var retrofitService: RetrofitService? = null

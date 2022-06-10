@@ -8,4 +8,8 @@ class MainRepository constructor(private val retrofitService: RetrofitService) {
         return retrofitService.getUsers(20, "desc", "name", inName,"stackoverflow")
     }
 
+    fun getTopTags(id :Int): Call<String> {
+        return retrofitService.getTopTags(id, 5,"stackoverflow")
+    }
+
 }

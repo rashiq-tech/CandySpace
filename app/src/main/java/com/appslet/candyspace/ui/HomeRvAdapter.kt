@@ -10,6 +10,8 @@ import com.appslet.candyspace.databinding.RowItemHomeBinding
 import com.appslet.candyspace.model.User
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class HomeRvAdapter constructor(val context: Context) :
     RecyclerView.Adapter<HomeRvAdapter.MainViewHolder>() {
@@ -37,6 +39,7 @@ class HomeRvAdapter constructor(val context: Context) :
 
         holder.itemView.setOnClickListener{
             val intent = Intent(context, UserDetailActivity::class.java)
+            intent.putExtra(UserDetailActivity.USER_TAG, Json.encodeToString(user))
             context.startActivity(intent)
         }
     }

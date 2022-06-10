@@ -1,9 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_user" />
+
+        <TextView
+            android:id="@+id/tv_reputation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_userName" />
+
+        <TextView
+            android:id="@+id/label_reputation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="reputation"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_reputation" />
+
+        <ImageView
+            android:id="@+id/iv_gold"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/im_gold_medal"
+            app:layout_constraintEnd_toStartOf="@id/tv_goldBadgeCount"
+            app:layout_constraintStart_toStartOf="@id/label_reputation"
+            app:layout_constraintTop_toBottomOf="@id/label_reputation" />
+
+        <TextView
+            android:id="@+id/tv_goldBadgeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_gold"
+            app:layout_constraintEnd_toStartOf="@id/iv_silver"
+            app:layout_constraintStart_toEndOf="@id/iv_gold"
+            app:layout_constraintTop_toTopOf="@id/iv_gold" />
+
+        <ImageView
+            android:id="@+id/iv_silver"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/im_silver_medal"
+            app:layout_constraintEnd_toStartOf="@id/tv_silverBadgeCount"
+            app:layout_constraintStart_toEndOf="@id/tv_goldBadgeCount"
+            app:layout_constraintTop_toBottomOf="@id/label_reputation" />
+
+        <TextView
+            android:id="@+id/tv_silverBadgeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_silver"
+            app:layout_constraintEnd_toStartOf="@id/iv_bronze"
+            app:layout_constraintStart_toEndOf="@id/iv_silver"
+            app:layout_constraintTop_toTopOf="@id/iv_silver" />
+
+        <ImageView
+            android:id="@+id/iv_bronze"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/im_bronze_medal"
+            app:layout_constraintEnd_toStartOf="@id/tv_bronzeBadgeCount"
+            app:layout_constraintStart_toEndOf="@id/tv_silverBadgeCount"
+            app:layout_constraintTop_toBottomOf="@id/label_reputation" />
+
+        <TextView
+            android:id="@+id/tv_bronzeBadgeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bronze"
+            app:layout_constraintEnd_toEndOf="@id/label_reputation"
+            app:layout_constraintStart_toEndOf="@id/iv_bronze"
+            app:layout_constraintTop_toTopOf="@id/iv_bronze" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bronze" />
+
+        <TextView
+            android:id="@+id/label_createdDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Created at : "
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toStartOf="@id/tv_createdDate"
+            app:layout_constraintStart_toStartOf="@id/tv_location"
+            app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+        <TextView
+            android:id="@+id/tv_createdDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_location"
+            app:layout_constraintStart_toEndOf="@id/label_createdDate"
+            app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_topTags"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_createdDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+

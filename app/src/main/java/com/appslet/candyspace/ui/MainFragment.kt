@@ -2,11 +2,13 @@ package com.appslet.candyspace.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +20,6 @@ import com.appslet.candyspace.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
-
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -27,13 +28,16 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var retrofitService : RetrofitService
+    lateinit var retrofitService: RetrofitService
     lateinit var adapter: HomeRvAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retrofitService = RetrofitService.getInstance()
-        viewModel = ViewModelProvider(this, ViewModelFactory(MainRepository(retrofitService)))[MainViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(MainRepository(retrofitService))
+        )[MainViewModel::class.java]
 
     }
 
@@ -56,10 +60,14 @@ class MainFragment : Fragment() {
             adapter.setHomePostList(it)
         })
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        binding.btSearch.setOnClickListener{
+        //inputType made to TYPE_NULL inorder to hide keypad on clear focus
+        binding.etSearch.inputType = InputType.TYPE_NULL;
+        binding.btSearch.setOnClickListener {
             viewModel.getUsersList(binding.etSearch.text.toString())
+            binding.etSearch.clearFocus()
         }
 
         return binding.root

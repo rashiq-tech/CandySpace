@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/sh_border_round_ash.xml" value="0.1475" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_user_detail.xml" value="0.3830769230769231" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_item_home.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/row_item_tag.xml" value="0.3830769230769231" />
       </map>
     </option>
   </component>
