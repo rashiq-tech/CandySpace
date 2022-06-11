@@ -1,6 +1,7 @@
 package com.appslet.candyspace.utils
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
@@ -9,20 +10,20 @@ import retrofit2.http.*
 interface RetrofitService {
 
     @GET("users")
-    fun getUsers(
+    suspend fun getUsers(
         @Query("pagesize") pageSize: Int,
         @Query("order") order: String,
         @Query("sort") sort: String,
         @Query("inname") inName: String,
         @Query("site") site: String
-    ): Call<String>
+    ): Response<String>
 
     @GET("users/{id}/top-tags")
-    fun getTopTags(
+    suspend fun getTopTags(
         @Path(value = "id") id: Int,
         @Query("pagesize") pageSize: Int,
         @Query("site") site: String
-    ): Call<String>
+    ): Response<String>
 
 
     companion object {

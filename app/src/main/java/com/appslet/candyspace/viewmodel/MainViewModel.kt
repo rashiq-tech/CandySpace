@@ -6,6 +6,7 @@ import com.appslet.candyspace.model.Tags
 import com.appslet.candyspace.model.User
 import com.appslet.candyspace.utils.MainRepository
 import com.google.gson.Gson
+import kotlinx.coroutines.*
 import okhttp3.Request
 import org.json.JSONObject
 import retrofit2.Call
@@ -18,13 +19,14 @@ class MainViewModel constructor(private val repository: MainRepository) : ViewMo
     val topTagList = MutableLiveData<List<Tags>>()
     val errorMessage = MutableLiveData<String>()
 
+    var job: Job? = null
+
     //to get tall users list with 20 limit, ordered in desc order based on name
     fun getUsersList(inName: String) {
-        val response = repository.getUsers(inName)
-        response.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                try {
-
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getUsers(inName)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
                     if (response.code() == 200) {
                         val jsonResponse = JSONObject(response.body().toString())
                         val jsonData = jsonResponse.getJSONArray("items")
@@ -36,24 +38,20 @@ class MainViewModel constructor(private val repository: MainRepository) : ViewMo
                     } else {
                         errorMessage.postValue(response.message())
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    errorMessage.postValue(e.message)
+                } else {
+                    errorMessage.postValue(response.message())
                 }
             }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                errorMessage.postValue(t.message)
-            }
-        })
+        }
     }
 
     //to get top tags against user account_id
     fun getTopTags(id: Int) {
-        val response = repository.getTopTags(id)
-        response.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                try {
+
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getTopTags(id)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
                     if (response.code() == 200) {
                         val jsonResponse = JSONObject(response.body().toString())
                         val jsonData = jsonResponse.getJSONArray("items")
@@ -65,16 +63,18 @@ class MainViewModel constructor(private val repository: MainRepository) : ViewMo
                     } else {
                         errorMessage.postValue(response.message())
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    errorMessage.postValue(e.message)
+                } else {
+                    errorMessage.postValue(response.message())
                 }
             }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                errorMessage.postValue(t.message)
-            }
-        })
+        }
     }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
+    }
+
 
 }
